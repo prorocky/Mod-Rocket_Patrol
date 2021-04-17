@@ -15,7 +15,7 @@ class Menu extends Phaser.Scene {
         let menuConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
+            backgroundColor: '#DEFACE',
             color: '#843605',
             align: 'right',
             padding: {
@@ -24,9 +24,11 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
-
+        
+        // CHANGE MENU TEXT FOR 2 PLAYERS
         // show menu text
         this.add.text(game.config.width / 2, game.config.height / 2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
+        menuConfig.backgroundColor = '#F3B141';
         this.add.text(game.config.width / 2, game.config.height / 2, 'Use ←→ arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#00FF00';
         menuConfig.color = '#000';
