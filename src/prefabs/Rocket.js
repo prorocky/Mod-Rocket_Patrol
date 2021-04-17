@@ -22,36 +22,34 @@ class Rocket extends Phaser.GameObjects.Sprite {
                 this.y = game.config.height - borderUISize - borderPadding;
                 this.isFiring = false;
             }
-        } else {
-
-            // rocket controls P1 (left and right)
-            if (this.num == 1 && keyA.isDown) {
-                this.x -= this.moveSpeed;
-            }
-            if (this.num == 1 && keyD.isDown) {
-                this.x += this.moveSpeed;
-            }
-            // rocket fire
-            if (this.num == 1 && Phaser.Input.Keyboard.JustDown(keyW) && !this.isFiring) {
-                this.isFiring = true;
-                this.sfxRocket.play();
-            }
-
-            // rocket controls P2 (left and right)
-            if (this.num == 2 && keyLEFT.isDown) {
-                this.x -= this.moveSpeed;
-            }
-            if (this.num == 2 && keyRIGHT.isDown) {
-                this.x += this.moveSpeed;
-            }
-            // rocket fire
-            if (this.num == 2 && Phaser.Input.Keyboard.JustDown(keyUP) && !this.isFiring) {
-                this.isFiring = true;
-                this.sfxRocket.play();
-            }
-
-
         }
+
+        // rocket controls P1 (left and right)
+        if (this.num == 1 && keyA.isDown) {
+            this.x -= this.moveSpeed;
+        }
+        if (this.num == 1 && keyD.isDown) {
+            this.x += this.moveSpeed;
+        }
+        // rocket fire
+        if (this.num == 1 && Phaser.Input.Keyboard.JustDown(keyW) && !this.isFiring) {
+            this.isFiring = true;
+            this.sfxRocket.play();
+        }
+
+        // rocket controls P2 (left and right)
+        if (this.num == 2 && keyLEFT.isDown) {
+            this.x -= this.moveSpeed;
+        }
+        if (this.num == 2 && keyRIGHT.isDown) {
+            this.x += this.moveSpeed;
+        }
+        // rocket fire
+        if (this.num == 2 && Phaser.Input.Keyboard.JustDown(keyUP) && !this.isFiring) {
+            this.isFiring = true;
+            this.sfxRocket.play();
+        }
+
         // Make sure rocket stays in border of screen
         this.x = Phaser.Math.Clamp(this.x, borderUISize + borderPadding, game.config.width - borderUISize - borderPadding);
     }

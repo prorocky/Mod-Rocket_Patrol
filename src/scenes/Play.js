@@ -6,15 +6,19 @@ class Play extends Phaser.Scene {
     preload() {
         // load images/sprites
         this.load.image('starfield', 'assets/starfield.png');
+
+        // rocket sprites
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('rocket_red', 'assets/red_rocket.png');
         this.load.image('rocket_orange', 'assets/orange_rocket.png');
         this.load.image('rocket_yellow', 'assets/yellow_rocket.png');
         this.load.image('rocket_green', 'assets/green_rocket.png');
-        this.load.image('rocket_lightblue', 'assets/lightblue_rocket.png');
         this.load.image('rocket_blue', 'assets/blue_rocket.png');
+        this.load.image('rocket_lightblue', 'assets/lightblue_rocket.png');
         this.load.image('rocket_darkblue', 'assets/darkblue_rocket.png');
         this.load.image('rocket_purple', 'assets/purple_rocket.png');
+        this.load.image('rocket_pink', 'assets/pink_rocket.png');
+
         this.load.image('spaceship', 'assets/spaceship.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     
@@ -134,11 +138,17 @@ class Play extends Phaser.Scene {
         this.gameOver = false;
 
        scoreConfig.fixedWidth = 0;
+
+        this.clock = this.time.delayedCall(30000, () => {
+            game.settings.spaceshipSpeed += 2;
+        }, null, this);
+
+
        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
-           this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-           this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← for menu', scoreConfig).setOrigin(0.5);
-           this.gameOver = true;
-       }, null, this);
+            this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← for menu', scoreConfig).setOrigin(0.5);
+            this.gameOver = true;
+        }, null, this);
     }
 
     update() {
