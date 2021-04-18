@@ -70,3 +70,6 @@ let colorCodes =
 
 // player color variables
 let colorP1, colorP2;
+
+// variables for gameplay
+let timeRemaining, scoreConfig;

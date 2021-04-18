@@ -21,7 +21,6 @@ class CharacterSelect extends Phaser.Scene {
     }
 
     create() {
-
         let textConfig = {
             fontFamily: 'Courier',
             fontSize: '19px',
@@ -39,8 +38,8 @@ class CharacterSelect extends Phaser.Scene {
 
         // directions
         this.add.text(game.config.width / 2, borderUISize + borderPadding, 'Type the first letter of a color to select that color.\nP1 goes first, players cannot select the same color.', textConfig).setOrigin(0.5);
-        
         textConfig.fontSize = '30px';
+        
         // color
         // text box for color
         // keyboard key to select color
@@ -94,7 +93,6 @@ class CharacterSelect extends Phaser.Scene {
         textConfig.color = colorCodes.white.hex;
         this.add.text(game.config.width / 8 * 7 - borderUISize - borderPadding, game.config.height / 6 * 5 + borderUISize, 'WHITE', textConfig).setOrigin(0.5);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-
 
     }
 

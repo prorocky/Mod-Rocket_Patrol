@@ -16,19 +16,22 @@ class Mode extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+        // title
+        this.add.text(game.config.width / 2, borderUISize + borderPadding, 'ROCKET PATROL', textConfig).setOrigin(0.5);
 
         // directions
-        this.add.text(game.config.width / 2, game.config.height / 12 + borderUISize + borderPadding, 'Select the mode you would like to play.\nPress (1) or (2) to select or press (A)\nto learn more about the different modes.', textConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2, game.config.height / 4, 'Select the mode you would like to play.\nPress (1) or (2) to select or press (A)\nto learn more about the different modes.', textConfig).setOrigin(0.5);
         
         // list modes
-        this.add.text(game.config.width / 8 * 2 + borderUISize + borderPadding, game.config.height / 6 * 2 + borderUISize, '1)  Singleplayer', textConfig).setOrigin(0.5);
-        this.add.text(game.config.width / 8 * 2 + borderUISize + borderPadding, game.config.height / 6 * 3 + borderUISize, '2)  Multiplayer ', textConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2 - borderUISize, game.config.height / 6 * 3, '1)  Singleplayer', textConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2 - borderUISize, game.config.height / 6 * 4, '2)  Multiplayer ', textConfig).setOrigin(0.5);
 
         // define keys
         key1 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
         key2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
     }
+
     update() {
         if (Phaser.Input.Keyboard.JustDown(key1) && mode == 0) {
             mode = 1;
@@ -42,6 +45,4 @@ class Mode extends Phaser.Scene {
             this.scene.start('aboutModesScene');
         }
     }
-
-
 }
