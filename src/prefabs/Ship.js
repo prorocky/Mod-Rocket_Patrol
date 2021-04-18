@@ -4,7 +4,6 @@ class Ship extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         this.dir = direction;
         this.moveSpeed = game.settings.spaceshipSpeed * this.dir;
-        console.log(this.moveSpeed);
         this.points = pointValue;
     }
 

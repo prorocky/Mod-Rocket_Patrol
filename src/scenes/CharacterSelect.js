@@ -8,7 +8,7 @@ class CharacterSelect extends Phaser.Scene {
         this.load.audio('sfx_select', 'assets/blip_select12.wav');
 
         // load sprites
-        this.load.image('rocket', 'assets/rocket.png');
+        this.load.image('rocket', 'assets/white_rocket.png');
         this.load.image('rocket_red', 'assets/red_rocket.png');
         this.load.image('rocket_orange', 'assets/orange_rocket.png');
         this.load.image('rocket_yellow', 'assets/yellow_rocket.png');
@@ -35,7 +35,8 @@ class CharacterSelect extends Phaser.Scene {
             fixedWidth: 0
         }
         // selection flag
-        this.p1Choosing = 1;
+        this.p1Selected = 0;
+        this.p2Selected = 0;
 
         // directions
         this.add.text(game.config.width / 2, borderUISize + borderPadding, 'Type the first letter of a color \nto select that color. P1 goes first', textConfig).setOrigin(0.5);
@@ -99,34 +100,116 @@ class CharacterSelect extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
-            console.log("red");
+            if (!this.p1Selected) {
+                colorP1 = "red";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "red") {
+                colorP2 = "red";
+                this.p2Selected = 1;
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyO)) {
-            console.log("orange");
+            if (!this.p1Selected) {
+                colorP1 = "orange";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "orange") {
+                colorP2 = "orange";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyY)) {
-            console.log("yellow");
+            if (!this.p1Selected) {
+                colorP1 = "yellow";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "yellow") {
+                colorP2 = "yellow";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyG)) {
-            console.log("green");
+            if (!this.p1Selected) {
+                colorP1 = "green";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "green") {
+                colorP2 = "green";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyL)) {
-            console.log("lightblue");
+            if (!this.p1Selected) {
+                colorP1 = "lightblue";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "lightblue") {
+                colorP2 = "lightblue";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyB)) {
-            console.log("blue");
+            if (!this.p1Selected) {
+                colorP1 = "blue";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "blue") {
+                colorP2 = "blue";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyD)) {
-            console.log("darkblue");
+            if (!this.p1Selected) {
+                colorP1 = "darkblue";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "darkblue") {
+                colorP2 = "darkblue";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyV)) {
-            console.log("violet");
+            if (!this.p1Selected) {
+                colorP1 = "violet";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "violet") {
+                colorP2 = "violet";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyP)) {
-            console.log("pink");
+            if (!this.p1Selected) {
+                colorP1 = "pink";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "pink") {
+                colorP2 = "pink";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
         }
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            console.log("white");
+            if (!this.p1Selected) {
+                colorP1 = "white";
+                this.p1Selected = 1;
+                this.sound.play('sfx_select');
+            } else if (!this.p2Selected && colorP1 != "white") {
+                colorP2 = "white";
+                this.p2Selected = 1;
+                this.sound.play('sfx_select');
+            }
+        }
+        if (this.p1Selected && this.p2Selected) {
+            this.scene.start('menuScene');
         }
 
     }

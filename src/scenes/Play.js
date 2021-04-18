@@ -35,21 +35,23 @@ class Play extends Phaser.Scene {
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
 
         // P1 rocket
+        let assetName = 'rocket_' + colorP1;
         this.p1Rocket = new Rocket(
             this,
             game.config.width / 4,
             game.config.height - borderUISize - borderPadding,
-            'rocket_orange',
+            assetName,
             0,
             1
         ).setOrigin(0.5, 0);
 
         // P2 rocket
+        assetName = 'rocket_' + colorP2;
         this.p2Rocket = new Rocket(
             this,
             game.config.width / 4 * 3,
             game.config.height - borderUISize - borderPadding,
-            'rocket',
+            assetName,
             0,
             2
         ).setOrigin(0.5, 0);
