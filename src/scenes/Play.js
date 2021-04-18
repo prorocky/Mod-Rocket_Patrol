@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
         this.load.image('starfield', 'assets/starfield.png');
 
         // rocket sprites
-        this.load.image('rocket', 'assets/rocket.png');
+        this.load.image('rocket_white', 'assets/white_rocket.png');
         this.load.image('rocket_red', 'assets/red_rocket.png');
         this.load.image('rocket_orange', 'assets/orange_rocket.png');
         this.load.image('rocket_yellow', 'assets/yellow_rocket.png');
@@ -16,7 +16,7 @@ class Play extends Phaser.Scene {
         this.load.image('rocket_blue', 'assets/blue_rocket.png');
         this.load.image('rocket_lightblue', 'assets/lightblue_rocket.png');
         this.load.image('rocket_darkblue', 'assets/darkblue_rocket.png');
-        this.load.image('rocket_purple', 'assets/purple_rocket.png');
+        this.load.image('rocket_violet', 'assets/violet_rocket.png');
         this.load.image('rocket_pink', 'assets/pink_rocket.png');
 
         this.load.image('spaceship', 'assets/spaceship.png');
