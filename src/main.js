@@ -70,5 +70,3 @@ let colorCodes =
 
 // player color variables
 let colorP1, colorP2;
-
-// ADD CHARACTER SELECT SCRIPT

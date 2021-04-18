@@ -264,9 +264,6 @@ class Play extends Phaser.Scene {
             boom.destroy();
         });
 
-        
-        // EDIT: MOVE THIS CODE INTO COLLISION INSTEAD OF EXPLODE
-
         // play audio for explosion
         this.sound.play('sfx_explosion');
     }
