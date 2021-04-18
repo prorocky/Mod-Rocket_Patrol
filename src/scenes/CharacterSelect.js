@@ -24,7 +24,7 @@ class CharacterSelect extends Phaser.Scene {
 
         let textConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
+            fontSize: '19px',
             backgroundColor: '#000',
             color: '#DEFACE',
             align: 'right',
@@ -35,63 +35,63 @@ class CharacterSelect extends Phaser.Scene {
             fixedWidth: 0
         }
         // selection flag
-        this.p1Selected = 0;
-        this.p2Selected = 0;
+        this.playersSelected = 0;
 
         // directions
-        this.add.text(game.config.width / 2, borderUISize + borderPadding, 'Type the first letter of a color \nto select that color. P1 goes first', textConfig).setOrigin(0.5);
+        this.add.text(game.config.width / 2, borderUISize + borderPadding, 'Type the first letter of a color to select that color.\nP1 goes first, players cannot select the same color.', textConfig).setOrigin(0.5);
         
+        textConfig.fontSize = '30px';
         // color
         // text box for color
         // keyboard key to select color
 
         // red
-        textConfig.color = '#FF0000';
+        textConfig.color = colorCodes.red.hex;
         this.add.text(game.config.width / 8 * 1 + borderUISize + borderPadding, game.config.height / 6 * 1 + borderUISize, 'RED', textConfig).setOrigin(0.5);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
         // orange
-        textConfig.color = '#FF7f27';
+        textConfig.color = colorCodes.orange.hex;
         this.add.text(game.config.width / 8 * 7 - borderUISize - borderPadding, game.config.height / 6 * 1 + borderUISize, 'ORANGE', textConfig).setOrigin(0.5);
         keyO = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.O);
 
         // yellow
-        textConfig.color = '#FFF200';
+        textConfig.color = colorCodes.yellow.hex;
         this.add.text(game.config.width / 8 * 1 + borderUISize + borderPadding, game.config.height / 6 * 2 + borderUISize, 'YELLOW', textConfig).setOrigin(0.5);
         keyY = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Y);
 
         // green
-        textConfig.color = '#0ED145';
+        textConfig.color = colorCodes.green.hex;
         this.add.text(game.config.width / 8 * 7 - borderUISize - borderPadding, game.config.height / 6 * 2 + borderUISize, 'GREEN', textConfig).setOrigin(0.5);
         keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
 
         // light blue
-        textConfig.color = '#8CFFFB';
+        textConfig.color = colorCodes.light_blue.hex;
         this.add.text(game.config.width / 8 * 1 + borderUISize + borderPadding, game.config.height / 6 * 3 + borderUISize, 'LIGHT BLUE', textConfig).setOrigin(0.5);
         keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
 
         // blue
-        textConfig.color = '#00A8F3';
+        textConfig.color = colorCodes.blue.hex;
         this.add.text(game.config.width / 8 * 7 - borderUISize - borderPadding, game.config.height / 6 * 3 + borderUISize, 'BLUE', textConfig).setOrigin(0.5);
         keyB = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
 
         // dark blue
-        textConfig.color = '#0D01F6';
+        textConfig.color = colorCodes.dark_blue.hex;
         this.add.text(game.config.width / 8 * 1 + borderUISize + borderPadding, game.config.height / 6 * 4 + borderUISize, 'DARK BLUE', textConfig).setOrigin(0.5);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
         // violet
-        textConfig.color = '#BD3DBA';
-        this.add.text(game.config.width / 8 * 7 - borderUISize - borderPadding, game.config.height / 6 * 4 + borderUISize, 'PURPLE', textConfig).setOrigin(0.5);
+        textConfig.color = colorCodes.violet.hex;
+        this.add.text(game.config.width / 8 * 7 - borderUISize - borderPadding, game.config.height / 6 * 4 + borderUISize, 'VIOLET', textConfig).setOrigin(0.5);
         keyV = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V);
 
         // pink
-        textConfig.color = '#FFAEC8';
+        textConfig.color = colorCodes.pink.hex;
         this.add.text(game.config.width / 8 * 1 + borderUISize + borderPadding, game.config.height / 6 * 5 + borderUISize, 'PINK', textConfig).setOrigin(0.5);
         keyP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
         // white
-        textConfig.color = '#FFFFFF';
+        textConfig.color = colorCodes.white.hex;
         this.add.text(game.config.width / 8 * 7 - borderUISize - borderPadding, game.config.height / 6 * 5 + borderUISize, 'WHITE', textConfig).setOrigin(0.5);
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
 
@@ -100,115 +100,115 @@ class CharacterSelect extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
-            if (!this.p1Selected) {
-                colorP1 = "red";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.red.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "red") {
-                colorP2 = "red";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.red.name) {
+                colorP2 = colorCodes.red.name;
+                this.playersSelected++;
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyO)) {
-            if (!this.p1Selected) {
-                colorP1 = "orange";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.orange.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "orange") {
-                colorP2 = "orange";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.orange.name) {
+                colorP2 = colorCodes.orange.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyY)) {
-            if (!this.p1Selected) {
-                colorP1 = "yellow";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.yellow.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "yellow") {
-                colorP2 = "yellow";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.yellow.name) {
+                colorP2 = colorCodes.yellow.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyG)) {
-            if (!this.p1Selected) {
-                colorP1 = "green";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.green.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "green") {
-                colorP2 = "green";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.green.name) {
+                colorP2 = colorCodes.green.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyL)) {
-            if (!this.p1Selected) {
-                colorP1 = "lightblue";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.light_blue.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "lightblue") {
-                colorP2 = "lightblue";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.light_blue.name) {
+                colorP2 = colorCodes.light_blue.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyB)) {
-            if (!this.p1Selected) {
-                colorP1 = "blue";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.blue.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "blue") {
-                colorP2 = "blue";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.blue.name) {
+                colorP2 = colorCodes.blue.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyD)) {
-            if (!this.p1Selected) {
-                colorP1 = "darkblue";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.dark_blue.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "darkblue") {
-                colorP2 = "darkblue";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.dark_blue.name) {
+                colorP2 = colorCodes.dark_blue.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyV)) {
-            if (!this.p1Selected) {
-                colorP1 = "violet";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.violet.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "violet") {
-                colorP2 = "violet";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.violet.name) {
+                colorP2 = colorCodes.violet.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyP)) {
-            if (!this.p1Selected) {
-                colorP1 = "pink";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.pink.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "pink") {
-                colorP2 = "pink";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.pink.name) {
+                colorP2 = colorCodes.pink.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
         if (Phaser.Input.Keyboard.JustDown(keyW)) {
-            if (!this.p1Selected) {
-                colorP1 = "white";
-                this.p1Selected = 1;
+            if (this.playersSelected == 0) {
+                colorP1 = colorCodes.white.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
-            } else if (!this.p2Selected && colorP1 != "white") {
-                colorP2 = "white";
-                this.p2Selected = 1;
+            } else if (this.playersSelected && colorP1 != colorCodes.white.name) {
+                colorP2 = colorCodes.white.name;
+                this.playersSelected++;
                 this.sound.play('sfx_select');
             }
         }
-        if (this.p1Selected && this.p2Selected) {
+        if (this.playersSelected == mode) {
             this.scene.start('menuScene');
         }
 
