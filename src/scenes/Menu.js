@@ -22,7 +22,6 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
         
-        // CHANGE MENU TEXT FOR 2 PLAYERS
         // show menu text
         this.add.text(game.config.width / 2, borderUISize + borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#F3B141';
