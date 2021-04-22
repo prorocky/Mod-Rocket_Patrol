@@ -1,3 +1,7 @@
+/*
+ * Oran Shadian, Rocket Patrol Mod
+ * 4/21/21, 16 hours
+ */
 class Play extends Phaser.Scene {
     constructor() {
         super("playScene");
@@ -22,7 +26,8 @@ class Play extends Phaser.Scene {
         this.load.image('spaceship', 'assets/spaceship.png');
         this.load.image('flipped_spaceship', 'assets/flipped_spaceship.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
-    
+        this.load.image('laser', 'assets/laser.png');
+        
         // load audio
         this.load.audio('sfx_select', 'assets/blip_select12.wav');
         this.load.audio('sfx_explosion', 'assets/explosion38.wav');
@@ -112,6 +117,7 @@ class Play extends Phaser.Scene {
         keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keySPACE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         // Player 2 controls
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -148,8 +154,23 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
 
+        // highscore config
+        let highscoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '18px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'left',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100,
+            fixedHeight: 20
+        }
+
         // initialize timeRemaining
-        timeRemaining = 60;
+        timeRemaining = game.settings.gameTimer / 1000;
 
         // 60-second timer
         this.timer = this.time.addEvent({
@@ -168,28 +189,37 @@ class Play extends Phaser.Scene {
 
         this.gameOver = false;
 
-       scoreConfig.fixedWidth = 0;
+       // display highscore
+       this.highscoreMiddle = this.add.text(game.config.width / 3 + borderUISize + borderPadding, game.config.height - borderUISize + 4, highscore, highscoreConfig);
 
         this.clock = this.time.delayedCall(30000, () => {
             game.settings.spaceshipSpeed += 2;
         }, null, this);
 
-        
+        scoreConfig.fixedWidth = 0;
         
     }
 
     timerEvent() {
         timeRemaining--;
-        console.log(timeRemaining);
     }
 
     update() {
+        // check mouse click
+        if (mode == 1) {
+            let pointer = this.input.activePointer;
+            if (pointer.isDown) {
+                this.p1Rocket.fire();
+            }
+        }
         // check for key input during restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            game.settings.spaceshipSpeed -= 2;
             this.scene.restart();
         }
 
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
+            game.settings.spaceshipSpeed -= 2;
             this.scene.start("menuScene");
         }
 
@@ -268,8 +298,19 @@ class Play extends Phaser.Scene {
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or ← for menu', scoreConfig).setOrigin(0.5);
             this.timer.paused = true;
+            // check for highscore
+            if (this.p1Score > highscore) {
+                highscore = this.p1Score;
+            }
+            if (mode == 2 && this.p2Score > highscore) {
+                highscore = this.p2Score;
+            }
             this.gameOver = true;
         }
+
+        // update highscore
+        this.highscoreMiddle.text = highscore;
+
     }
 
     checkCollision(rocket, ship) {
@@ -296,5 +337,10 @@ class Play extends Phaser.Scene {
 
         // play audio for explosion
         this.sound.play('sfx_explosion');
+    }
+
+    click(pointer) {
+        this.p1Rocket.fire();
+        console.log("CLICK");
     }
 }

@@ -1,3 +1,7 @@
+/*
+ * Oran Shadian, Rocket Patrol Mod
+ * 4/21/21, 16 hours
+ */
 class Ship extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame, pointValue, direction) {
         super(scene, x, y, texture, frame);
